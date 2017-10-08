@@ -1,0 +1,58 @@
+<html>
+<head>
+    <script src="lib/jquery-3.2.1.min.js"></script>
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="mainDiv">
+
+    <!-- Main Menu -->
+    <div class="mainMenu">
+        <div class="menuItem" onclick="menuClick(1)"><p>ESP</p></div>
+        <div class="menuItem" onclick="menuClick(2)"><p>Sensor</p></div>
+        <div class="menuItem" onclick="menuClick(3)"><p>Raspberry</p></div>
+    </div>
+
+    <!-- ESP -->
+    <div class="espControl">
+        <div class="menuItem" onclick="menuClick(0)"><p>Back</p></div>
+
+        <div class="espCollector">
+            <div class="esp" onclick="selectESP(0)"><p>Schreibtisch Vali</p></div>
+            <div class="esp" onclick="selectESP(1)"><p>Vitrine</p></div>
+        </div>
+
+        <div class="modeCollector">
+            <div class="mode" onclick="selectMode(0)"><p>Color</p></div>
+            <div class="mode" onclick="selectMode(1)"><p>Random Blink</p></div>
+            <div class="mode" onclick="selectMode(2)"><p>Ping Pong Classic</p></div>
+            <div class="mode" onclick="selectMode(3)"><p>Ping Pong RGB</p></div>
+            <div class="mode" onclick="selectMode(4)"><p>Ping Pong Double</p></div>
+            <div class="mode" onclick="selectMode(5)"><p>Rainbow Classic</p></div>
+            <div class="mode" onclick="selectMode(6)"><p>Turn LED OFF</p></div>
+        </div>
+
+        <div class="sendToServer" onclick="sendToServer()"><p>Send to Server</p></div>
+    </div>
+
+    <!-- Raspberry -->
+    <div class="raspberry">
+        <div class="menuItem" onclick="menuClick(0)"><p>Back</p></div>
+        here will be raspberry data
+    </div>
+
+    <!-- Sensor -->
+    <div class="sensor">
+        <div class="menuItem" onclick="menuClick(0)"><p>Back</p></div>
+        here will be sensor data
+    </div>
+
+<!--   <input id="colorInput" type="color" value="#000000" title="Select color">   -->
+
+</div>
+
+</body>
+</html>

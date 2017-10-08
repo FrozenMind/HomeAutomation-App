@@ -1,0 +1,112 @@
+/* generell */
+body{
+    padding: 0px;
+    overflow: hidden;
+}
+
+.mainDiv{
+    max-width: 100%;
+    overflow-y: scroll;
+    padding: 5px;
+}
+
+/* Main menu */
+.mainMenu{
+
+}
+
+.menuItem{
+    width: 120px;
+    height: 70px;
+    background-color: #00adad;
+    color: white;
+    float: left;
+    margin: 10px;
+    outline: none;
+    text-decoration: none;
+    text-align: center;
+    justify-content: middle;
+    font-weight: bold;
+    box-shadow: 0 0 5px 1px #000;
+    overflow: hidden;
+}
+
+/* ESP */
+.espControl{
+    max-width: 100%;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.espCollector{
+
+}
+
+.esp{
+    width: 120px;
+    height: 70px;
+    background-color: #ad0000;
+    color: white;
+    float: left;
+    margin: 10px;
+    padding: .4em 0px;
+    outline: none;
+    text-decoration: none;
+    text-align: center;
+    justify-content: middle;
+    font-weight: bold;
+    box-shadow: 0 0 5px 1px #000;
+    overflow: hidden;
+}
+
+.esp:hover{
+    box-shadow: 0 0 5px 1px #888;
+}
+
+.modeCollector{
+
+}
+
+.mode{
+    width: 120px;
+    height: 70px;
+    background-color: #00ad00;
+    float: left;
+    color: white;
+    margin: 10px;
+    padding: .4em 0px;
+    outline: none;
+    text-decoration: none;
+    text-align: center;
+    justify-content: middle;
+    font-weight: bold;
+    box-shadow: 0 0 5px 1px #000;
+    overflow: hidden;
+}
+
+.mode:hover{
+    box-shadow: 0 0 5px 1px #888;
+}
+
+.sendToServer{
+    width: 100%;
+    height: 10%;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    font-size: larger;
+    padding: .4em 0px;
+}
+
+/* raspberry */
+.raspberry{
+    display: none;
+}
+
+/* sensor */
+.sensor{
+    display: none;
+}
