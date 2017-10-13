@@ -10,15 +10,10 @@ body{
     padding: 5px;
 }
 
-/* Main menu */
-.mainMenu{
-
-}
-
-.menuItem{
+.item{
     width: 120px;
     height: 70px;
-    background-color: #00adad;
+    background-color: #000;
     color: white;
     float: left;
     margin: 10px;
@@ -31,8 +26,17 @@ body{
     overflow: hidden;
 }
 
+/* Main menu */
+.menuArea{
+
+}
+
+.menuItem{
+    background-color: #00adad;
+}
+
 /* ESP */
-.espControl{
+.espArea{
     max-width: 100%;
     overflow-y: scroll;
     display: flex;
@@ -45,20 +49,7 @@ body{
 }
 
 .esp{
-    width: 120px;
-    height: 70px;
     background-color: #ad0000;
-    color: white;
-    float: left;
-    margin: 10px;
-    padding: .4em 0px;
-    outline: none;
-    text-decoration: none;
-    text-align: center;
-    justify-content: middle;
-    font-weight: bold;
-    box-shadow: 0 0 5px 1px #000;
-    overflow: hidden;
 }
 
 .esp:hover{
@@ -70,20 +61,7 @@ body{
 }
 
 .mode{
-    width: 120px;
-    height: 70px;
     background-color: #00ad00;
-    float: left;
-    color: white;
-    margin: 10px;
-    padding: .4em 0px;
-    outline: none;
-    text-decoration: none;
-    text-align: center;
-    justify-content: middle;
-    font-weight: bold;
-    box-shadow: 0 0 5px 1px #000;
-    overflow: hidden;
 }
 
 .mode:hover{
@@ -102,11 +80,22 @@ body{
 }
 
 /* raspberry */
-.raspberry{
-    display: none;
+.piArea{
+}
+
+.piCollector{
+
+}
+
+.piItem{
+    background-color: #adad00;
 }
 
 /* sensor */
-.sensor{
-    display: none;
+.sensorArea {
+
+}
+
+.sensorCollector{
+
 }

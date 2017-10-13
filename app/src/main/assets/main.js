@@ -1,8 +1,15 @@
 //on start do some stuff as init
 $(document).ready(function() {
-    $(".espControl").hide()
+    //do init stuff
+    init()
 })
 
+function init(){
+    //display menu only
+    menuClick(0)
+    //log in to server
+    Android.sendToServer(JSON.stringify({ cmd: 10, id: 1, name: "Valentin" }))
+}
 
 var currentESP = {}
     , currentMode = {}
@@ -56,33 +63,54 @@ function sendToServer(){
 
 function receiveFromServer(msg){
     Android.showToast(msg, 0);
+    var data = JSON.parse(msg)
+    switch(data.cmd){
+        case 12: //get interval
+            showOsData(data)
+            break
+    }
 }
 
 function menuClick(id){
     switch(id){
         case 0: //main menu
-            $(".mainMenu").show()
-            $(".espControl").hide()
-            $(".sensor").hide()
-            $(".raspberry").hide()
+            $(".menuArea").show()
+            $(".espArea").hide()
+            $(".sensorArea").hide()
+            $(".piArea").hide()
+            //tell server to stop intervals
+            Android.sendToServer(JSON.stringify({ id: 1, cmd: 12 }))
             break
         case 1: //esp
-            $(".mainMenu").hide()
-            $(".espControl").show()
-            $(".sensor").hide()
-            $(".raspberry").hide()
+            $(".menuArea").hide()
+            $(".espArea").show()
+            $(".sensorArea").hide()
+            $(".piArea").hide()
             break
         case 2: //sensor
-            $(".mainMenu").hide()
-            $(".espControl").hide()
-            $(".sensor").show()
-            $(".raspberry").hide()
+            $(".menuArea").hide()
+            $(".espArea").hide()
+            $(".sensorArea").show()
+            $(".piArea").hide()
             break
         case 3: //raspberry
-            $(".mainMenu").hide()
-            $(".espControl").hide()
-            $(".sensor").hide()
-            $(".raspberry").show()
+            $(".menuArea").hide()
+            $(".espArea").hide()
+            $(".sensorArea").hide()
+            $(".piArea").show()
+            //tell server to start os data
+            Android.sendToServer(JSON.stringify({ id: 1, cmd: 11 }))
             break
+    }
+}
+
+function showOsData(data){
+    $(".piCollector").append($("<div class='piItem item'>Cores <br />" + data.core + "</div>"))
+    $(".piCollector").append($("<div class='piItem item'>Mem (MB) <br />" + data.mem.free + " / " + data.mem.total + "</div>"))
+    $(".piCollector").append($("<div class='piItem item'>Mem (%) <br />" + mem.percentage + "</div>"))
+    $(".piCollector").append($("<div class='piItem item'>Uptime <br />" + data.uptime + "</div>"))
+    $(".piCollector").append($("<h3>Network</h3>"))
+    for (var n in data.network) {
+      $(".piCollector").append($("<div class='piItem item'>" + n + "<br />" + data.network[n].address + "</div>"))
     }
 }
