@@ -5,7 +5,7 @@ package com.example.valentin.homeautomation;
  */
 
 public class Constants {
-    public static final String IP="192.168.0.53"; //Pi: 192.168.0.220
-    public static final int PORT=59003;
-
+    public static final String IP = "192.168.0.101"; //Pi: 192.168.0.220
+    public static final int PORT = 59003;
+    public static int ID = -1;
 }

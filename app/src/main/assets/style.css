@@ -91,6 +91,10 @@ body{
     background-color: #adad00;
 }
 
+.piItem p{
+    margin: 3px;
+}
+
 /* sensor */
 .sensorArea {
 

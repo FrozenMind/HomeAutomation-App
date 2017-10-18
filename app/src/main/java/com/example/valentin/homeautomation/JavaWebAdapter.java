@@ -37,4 +37,9 @@ public class JavaWebAdapter {
     public void sendToClient(String msg){
         ctx.webView.loadUrl("javascript:receiveFromServer('" + msg + "')");
     }
+
+    @JavascriptInterface
+    public void useID(int id){
+        Constants.ID = id;
+    }
 }

@@ -1,3 +1,5 @@
+var myLocalID = -1
+
 //on start do some stuff as init
 $(document).ready(function() {
     //do init stuff
@@ -5,10 +7,10 @@ $(document).ready(function() {
 })
 
 function init(){
-    //display menu only
-    menuClick(0)
     //log in to server
-    Android.sendToServer(JSON.stringify({ cmd: 10, id: 1, name: "Valentin" }))
+    sendToServer({ cmd: 10, id: myLocalID, name: 'Valentin' })
+    //display menu on1ly
+    menuClick(0)
 }
 
 var currentESP = {}
@@ -24,7 +26,6 @@ function selectESP(id){
             break;
     }
     currentESP.id = id
-    Android.showToast("ESP " + currentESP.name + " selected", 0)
 }
 
 function selectMode(id){
@@ -52,21 +53,24 @@ function selectMode(id){
                 break;
         }
         currentMode.id = id
-    Android.showToast("Mode " + currentMode.name + " selected", 0)
 }
 
 //send the selected stuff to the server
-function sendToServer(){
-    Android.showToast("Send to Server: ESP " + currentESP.name + " Mode " + currentMode.name, 1);
-    Android.sendToServer(JSON.stringify({ cmd: 1, esp: currentESP, mode: currentMode }))
+function sendToServer(msg){
+    Android.showToast(JSON.stringify(msg), 0);
+    Android.sendToServer(JSON.stringify(msg))
 }
 
 function receiveFromServer(msg){
     Android.showToast(msg, 0);
     var data = JSON.parse(msg)
     switch(data.cmd){
-        case 12: //get interval
+        case 13: //get interval
             showOsData(data)
+            break
+        case 100: //init id
+            myLocalID = data.id
+            Android.useID(data.id)
             break
     }
 }
@@ -79,7 +83,7 @@ function menuClick(id){
             $(".sensorArea").hide()
             $(".piArea").hide()
             //tell server to stop intervals
-            Android.sendToServer(JSON.stringify({ id: 1, cmd: 12 }))
+            sendToServer({ id: myLocalID, cmd: 12 })
             break
         case 1: //esp
             $(".menuArea").hide()
@@ -88,7 +92,7 @@ function menuClick(id){
             $(".piArea").hide()
             break
         case 2: //sensor
-            $(".menuArea").hide()
+            $(".menuArmyLocalIDea").hide()
             $(".espArea").hide()
             $(".sensorArea").show()
             $(".piArea").hide()
@@ -99,18 +103,30 @@ function menuClick(id){
             $(".sensorArea").hide()
             $(".piArea").show()
             //tell server to start os data
-            Android.sendToServer(JSON.stringify({ id: 1, cmd: 11 }))
+            sendToServer({ id: myLocalID, cmd: 11 })
             break
     }
 }
 
+var osLocker = false
 function showOsData(data){
-    $(".piCollector").append($("<div class='piItem item'>Cores <br />" + data.core + "</div>"))
-    $(".piCollector").append($("<div class='piItem item'>Mem (MB) <br />" + data.mem.free + " / " + data.mem.total + "</div>"))
-    $(".piCollector").append($("<div class='piItem item'>Mem (%) <br />" + mem.percentage + "</div>"))
-    $(".piCollector").append($("<div class='piItem item'>Uptime <br />" + data.uptime + "</div>"))
-    $(".piCollector").append($("<h3>Network</h3>"))
+    if(!osLocker){
+        $(".piCollector").append($("<div class='piItem item'><p>Cores</p> <p id='piCore'></p></div>"))
+        $(".piCollector").append($("<div class='piItem item'><p>Mem (MB)</p> <p id='piMem'></p></div>"))
+        $(".piCollector").append($("<div class='piItem item'><p>Mem (%)</p> <p id='piMemPercentage'></p></div>"))
+        $(".piCollector").append($("<div class='piItem item'><p>Uptime</p> <p id='piUptime'></p></div>"))
+        $(".piCollector").append($("<h3>Network</h3>"))
+        for (var n in data.network) {
+          $(".piCollector").append($("<div class='piItem item'><p>" + n + "</p> <p id='pi" + n + "'></p></div>"))
+        }
+        osLocker = true
+    }
+
+    $("#piCore").text(data.cores)
+    $("#piMem").text(data.mem.free + " / " + data.mem.total)
+    $("#piMemPercentage").text(data.mem.percentage)
+    $("#piUptime").text(data.uptime)
     for (var n in data.network) {
-      $(".piCollector").append($("<div class='piItem item'>" + n + "<br />" + data.network[n].address + "</div>"))
+        $("#pi" + n).text(data.network[n])
     }
 }
